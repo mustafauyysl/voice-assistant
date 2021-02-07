@@ -9,7 +9,8 @@ import os
 
 r = sr.Recognizer()
 
-def record(question = False):
+
+def record(question=False):
     with sr.Microphone() as source:
         if question:
             speak(question)
@@ -23,6 +24,7 @@ def record(question = False):
             speak('Sistem çalışmıyor')
         return voice
 
+
 def response(voice):
     if 'Nasılsın' in voice:
         speak('İyiyim.')
@@ -32,18 +34,20 @@ def response(voice):
         search = record('ne aramak istiyorsun')
         url = 'https://google.com/search?q='+search
         webbrowser.get().open(url)
-        speak(search+ 'için bulduklarım')
+        speak(search + 'için bulduklarım')
     if 'Görüşürüz' in voice:
         speak('görüşürüz')
         exit()
 
+
 def speak(string):
     tts = gTTS(string, lang='tr')
-    rand = random.randint(1,1000000)
+    rand = random.randint(1, 1000000)
     file = 'audio-'+str(rand)+'.mp3'
     tts.save(file)
     playsound(file)
     os.remove(file)
+
 
 speak('Merhaba, nasıl yardımcı olabilirim ?')
 time.sleep(1)
